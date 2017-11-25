@@ -35,12 +35,12 @@ $(document).ready(function() {
 
                 },
                 checkMatch: function() {
-                    if ('.selected').first().data('cardsymbol') == $('.selected').last().data('cardsymbol') {
+                    if ($('.selected').first().data('cardsymbol') == $('.selected').last().data('cardsymbol')) {
                     $('.selected').each(function() {
                         $(this).addClass('match');
-                        $(this).animate({
-                            animmation - name: flash
-                        });
+                      /*  $(this).animate({
+                            animmation-name: flash;
+                        });*/
                     });
                     $('.selected').each(function() {
                         $(this).removeClass('selected');
