@@ -24,32 +24,33 @@ $(document).ready(function() {
 
         assignCards: function() {
             $('.card').each(function(index) {
-                $(this).attr('cardsymbol', 'fa ${game.cardsList[index]}');
+                $(this).attr('data-card-value', `fa ${game.cardsList[index]}`);
             });
             game.clickHandlers();
         },
         clickHandlers: function() {
             $('.card').on('click', function() {
-                        $(this).html('<i>' + $(this).data('cardsymbol' + '</i>')).addClass('selected'); game.checkMatch();
+                        $(this).html('<i>' + $(this).data("cardValue") + '</i>').addClass('open'); 
+						game.checkMatch();
                         });
 
                 },
                 checkMatch: function() {
-                    if ($('.selected').first().data('cardsymbol') == $('.selected').last().data('cardsymbol')) {
-                    $('.selected').each(function() {
+                    if ($('.open').first().data('cardVlaue') == $('.open').last().data('cardValue')) {
+                    $('.open').each(function() {
                         $(this).addClass('match');
                       /*  $(this).animate({
                             animmation-name: flash;
                         });*/
                     });
-                    $('.selected').each(function() {
-                        $(this).removeClass('selected');
+                    $('.open').each(function() {
+                        $(this).removeClass('open');
                     });
                     game.checkWin();
                 } else {
                     setTimeout(function() {
-                        $('.selected').each(function() {
-                            $(this).html('').removeClass('selected');
+                        $('.open').each(function() {
+                            $(this).html('').removeClass('open');
                         });
                     }, 1000);
 
