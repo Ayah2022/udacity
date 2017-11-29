@@ -44,7 +44,7 @@ $(document).ready(function(){
                         cardList = shuffle(cardList);
                         cardList.forEach(AddCard);
                     }
-
+			}
                     function shuffle(array) {
                         var currentIndex = array.length,
                             temporaryValue, randomIndex;
@@ -62,7 +62,7 @@ $(document).ready(function(){
                     function AddCard(card) {
                         $('#deck').append(`<li class="card animated"><i class="fa ${card}"></i></li>`);
                     }
-			}
+			
                     var openedCards = []
 
                     function toggleCard() {
