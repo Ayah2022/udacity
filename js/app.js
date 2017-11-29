@@ -12,7 +12,18 @@ $(document).ready(function() {
 		$('#timer').html(timer.getTime().toString());
 	});
 	cardsList= ["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb"];
-       
+    function resetGame() {
+    moves = 0;
+    matched = 0;
+    $('#deck').empty();
+    $('#stars').empty();
+    $('#gameContainer')[0].style.display = "";
+    $('#sucess-result')[0].style.display = "none";
+    startGame=false;
+    timer.stop();
+    $('#timer').html("00:00:00");
+    initGame();
+}
 	function initGame{
 		createCards();
 		$('.card').click(toggleCard);
@@ -71,11 +82,51 @@ $(document).ready(function() {
 			  card.off('click');
 		  });
 	  }
+	  function updateMoves(){
+		  moves+=1;
+		  $('#moves').html(`${moves} Moves`);
+		  if(moves==16){
+			  rate();
+		  }
+		  else if (moves==10){
+			  rate();
+		  }
+	  }
+	  function rate(){
+		  $('#stars').children()[0].remove();
+		  $('#stars').append('<li><i class="fa fa-star-o"></i></li>');
+	  }
 	  function EnableClick(){
 		  openedCards[0].click(toggleCard);
 	  }
 	  function matchCards(){
-		  
+	    if (openedCards[0][0].firstChild.className == openedCards[1][0].firstChild.className) {
+        console.log("matchCard");
+        openedCards[0].addClass("match").animateCss('pulse');
+        openedCards[1].addClass("match").animateCss('pulse');
+        disableCLick();
+        removeOpenCards();
+        setTimeout(checkResult, 1000);
+    }
+    else {
+        openedCards[0].toggleClass("show open").animateCss('flipInY');
+        openedCards[1].toggleClass("show open").animateCss('flipInY');
+        EnableClick();
+        removeOpenCards();
+    }
+
+	  }
+	  function removeOpenCards() {
+      openedCards = [];
+	  }
+	  function checkResult(){
+		  matched+=1;
+		  if(matched==8){
+			  showWinBox();
+		  }
+	  }
+	  function showWinBox(){
+		  timer.pause();
 	  }
 
 	  //extend jquery to add function that does all animations
