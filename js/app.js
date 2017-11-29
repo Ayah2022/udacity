@@ -45,8 +45,49 @@ $(document).ready(function() {
 }
       function AddCard(card){
 		  $('#deck').append(`<li class="card animated"><i class="fa ${card}"></i></li>`);
-	  }     
+	  }  
+	  
+	  var openedCards=[]
+	  function toggleCard(){
+		  //start the timer
+		  if(startGame==false){
+			  startGame=true;
+			  timer.start();
+		  }
+		  if(openedCards.length===0){
+			  $(this).toggleClass("show open").animateCss('flipInY');
+			  openedCards.push($(this));
+			  disableClick();
+		  }
+		  else if(openedCards.length===1){
+			  updateMoves();
+			  $(this).toggleClass("show open").animateCss('flipInY');
+			  openedCards.push($(this));
+			  setTimeout(matchCards,1100);
+		  }
+	  }
+	  function disableClick(){
+		  openedCards.forEach(function(card){
+			  card.off('click');
+		  });
+	  }
+	  function EnableClick(){
+		  openedCards[0].click(toggleCard);
+	  }
+	  function matchCards(){
+		  
+	  }
 
+	  //extend jquery to add function that does all animations
+	  $.fn.extend({
+		  animateCss:function(animationName){
+			  var animationEnd='webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+			  this.addClass(animationName).one(animationEnd,function(){
+				  $(this).removeClass(animateName);
+			  });
+			  return this;
+		  }
+	  });
       initGame();
 /*
         assignCards: function() {
