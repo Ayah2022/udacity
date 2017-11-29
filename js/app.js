@@ -7,10 +7,10 @@ $(document).ready(function() {
 	var matched=0;
 	var startGame=false;
 	$('#reset-button').click(resetGame);
-	var timer= new timer();
+	/*var timer= new timer();
 	timer.addEventListener('timeupdated',function(event){
 		$('#timer').html(timer.getTime().toString());
-	});
+	});*/
 	cardsList= ["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb"];
     function resetGame() {
     moves = 0;
@@ -20,8 +20,8 @@ $(document).ready(function() {
     $('#gameContainer')[0].style.display = "";
     $('#sucess-result')[0].style.display = "none";
     startGame=false;
-    timer.stop();
-    $('#timer').html("00:00:00");
+    //timer.stop();
+    //$('#timer').html("00:00:00");
     initGame();
 }
 	function initGame{
@@ -126,7 +126,7 @@ $(document).ready(function() {
 		  }
 	  }
 	  function showWinBox(){
-		  timer.pause();
+		 // timer.pause();
 	  }
 
 	  //extend jquery to add function that does all animations
