@@ -141,7 +141,10 @@ $(document).ready(function(){
                     }
 
                     //extend jquery to add function that does all animations
-                    $.fn.extend({
+                  
+                    initGame();
+});
+  $.fn.extend({
                         animateCss: function(animationName) {
                             var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
                             this.addClass(animationName).one(animationEnd, function() {
@@ -150,5 +153,3 @@ $(document).ready(function(){
                             return this;
                         }
                     });
-                    initGame();
-});
