@@ -3,25 +3,52 @@
  */
 /*jQuery.noConflict()(function ($) {*/
 $(document).ready(function() {
-    var game = {
-        cardsList: ["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb", "fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb"],
-        init: function() {
-            game.shuffle();
-        },
-        shuffle: function() {
-            var random = 0;
-            var temp = 0;
-            for (var i = 1; i < game.cardsList.length; i++) {
-                random = Math.round(Math.random() * i);
-                temp = game.cardsList[i];
-                game.cardsList[i] = game.cardsList[random];
-                game.cardsList[random] = temp;
-            }
+	var moves=0;
+	var matched=0;
+	var startGame=false;
+	$('#reset-button').click(resetGame);
+	var timer= new timer();
+	timer.addEventListener('timeupdated',function(event){
+		$('#timer').html(timer.getTime().toString());
+	});
+	cardsList= ["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb"];
+       
+	function initGame{
+		createCards();
+		$('.card').click(toggleCard);
+		$('#moves').html("0 Moves");
+		addStars(3);
+	}
+	function addStars(num){
+		for(car i=0; i<num; i++){
+			$('#stars').append('<li><i class="fa fa-star"></i></li>');
+		}
+	}
+    function createCards() {
+			for(var i=0; i<2; i++){
+			cardList=shuffle(cardList);
+            cardList.forEach(AddCard);
+			}
+      
+    function shuffle(array) {
+		var currentIndex = array.length
+        , temporaryValue, randomIndex;
+        while (currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    
+    }
+    return array;
+}
+      function AddCard(card){
+		  $('#deck').append(`<li class="card animated"><i class="fa ${card}"></i></li>`);
+	  }     
 
-            game.assignCards();
-
-        },
-
+      initGame();
+/*
         assignCards: function() {
             $('.card').each(function(index) {
                 $(this).attr('data-card-value', `fa ${game.cardsList[index]}`);
@@ -36,13 +63,13 @@ $(document).ready(function() {
 
                 },
                 checkMatch: function() {
-                    if ($('.open').first().data('cardVlaue') == $('.open').last().data('cardValue')) {
+                    if ($('.open').first().data('cardVlaue') === $('.open').last().data('cardValue')) {
                     $('.open').each(function() {
                         $(this).addClass('match');
                       /*  $(this).animate({
                             animmation-name: flash;
                         });*/
-                    });
+                /*    });
                     $('.open').each(function() {
                         $(this).removeClass('open');
                     });
@@ -64,6 +91,7 @@ $(document).ready(function() {
     };
     game.init();
 });
+
 /*});*/
 
 /*
