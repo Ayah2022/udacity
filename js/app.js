@@ -27,7 +27,7 @@ $(document).ready(function() {
     function createCards() {
 			for(var i=0; i<2; i++){
 			cardList=shuffle(cardList);
-            cardList.each(AddCard);
+            cardList.forEach(AddCard);
 			}
       
     function shuffle(array) {
