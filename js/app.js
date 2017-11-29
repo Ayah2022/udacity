@@ -62,7 +62,7 @@ $(document).ready(function() {
                     function AddCard(card) {
                         $('#deck').append(`<li class="card animated"><i class="fa ${card}"></i></li>`);
                     }
-
+			}
                     var openedCards = []
 
                     function toggleCard() {
@@ -151,3 +151,4 @@ $(document).ready(function() {
                         }
                     });
                     initGame();
+}
