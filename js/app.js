@@ -27,7 +27,7 @@ $(document).ready(function() {
     function createCards() {
 			for(var i=0; i<2; i++){
 			cardList=shuffle(cardList);
-            cardList.forEach(AddCard);
+            cardList.each(AddCard);
 			}
       
     function shuffle(array) {
@@ -63,33 +63,15 @@ $(document).ready(function() {
 
                 },
                 checkMatch: function() {
-<<<<<<< HEAD
                     if ($('.open').first().data('cardVlaue') === $('.open').last().data('cardValue')) {
                     $('.open').each(function() {
-||||||| merged common ancestors
-                    if ($('.selected').first().data('cardsymbol') == $('.selected').last().data('cardsymbol')) {
-                    $('.selected').each(function() {
-=======
-                    if ($('.open').first().data('cardVlaue') == $('.open').last().data('cardValue')) {
-                    $('.open').each(function() {
->>>>>>> 3d4e926df57f63fafa304e93e880ade3d43cc962
                         $(this).addClass('match');
                       /*  $(this).animate({
                             animmation-name: flash;
                         });*/
-<<<<<<< HEAD
                 /*    });
                     $('.open').each(function() {
                         $(this).removeClass('open');
-||||||| merged common ancestors
-                    });
-                    $('.selected').each(function() {
-                        $(this).removeClass('selected');
-=======
-                    });
-                    $('.open').each(function() {
-                        $(this).removeClass('open');
->>>>>>> 3d4e926df57f63fafa304e93e880ade3d43cc962
                     });
                     game.checkWin();
                 } else {
