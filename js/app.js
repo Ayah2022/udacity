@@ -2,7 +2,7 @@
  * Create a list that holds all of your cards
  */
 /*jQuery.noConflict()(function ($) {*/
-$(document).ready(function() {
+
             var moves = 0;
             var matched = 0;
             var startGame = false;
@@ -151,4 +151,3 @@ $(document).ready(function() {
                         }
                     });
                     initGame();
-}
