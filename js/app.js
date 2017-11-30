@@ -2,16 +2,30 @@
  * Create a list that holds all of your cards
  */
 /*jQuery.noConflict()(function ($) {*/
-$(document).ready(function(){
-            var moves = 0;
+ var moves = 0;
+  var openedCards = []
             var matched = 0;
             var startGame = false;
             $('#reset-button').click(resetGame);
-            /*var timer= new timer();
+			
+            var timer= new timer();
 	timer.addEventListener('timeupdated',function(event){
 		$('#timer').html(timer.getTime().toString());
-	});*/
-            cardsList = ["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb"];
+	});
+            cardsList = ["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb",
+			"fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb"];
+                    //extend jquery to add function that does all animations
+                    $.fn.extend({
+                        animateCss: function(animationName) {
+                            var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+                            this.addClass(animationName).one(animationEnd, function() {
+                                $(this).removeClass(animateName);
+                            });
+                            return this;
+                        }
+                    });	
+
+           
 
             function resetGame() {
                 moves = 0;
@@ -21,8 +35,8 @@ $(document).ready(function(){
                 //$('#gameContainer')[0].style.display = "";
                 //$('#sucess-result')[0].style.display = "none";
                 startGame = false;
-                //timer.stop();
-                //$('#timer').html("00:00:00");
+                timer.stop();
+                $('#timer').html("00:00:00");
                 initGame();
             }
 
@@ -40,10 +54,11 @@ $(document).ready(function(){
             }
 
             function createCards() {
-                    for (var i = 0; i < 2; i++) {
+               
                         cardList = shuffle(cardList);
                         cardList.forEach(AddCard);
-                    }
+				 
+                    
 			}
                     function shuffle(array) {
                         var currentIndex = array.length,
@@ -62,8 +77,9 @@ $(document).ready(function(){
                     function AddCard(card) {
                         $('#deck').append(`<li class="card animated"><i class="fa ${card}"></i></li>`);
                     }
+				
 			
-                    var openedCards = []
+                   
 
                     function toggleCard() {
                         //start the timer
@@ -100,8 +116,8 @@ $(document).ready(function(){
                     }
 
                     function rate() {
-                        $('#stars').children()[0].remove();
-                        $('#stars').append('<li><i class="fa fa-star-o"></i></li>');
+                        $('#stars').children()[0].removeClass('fa fa-star').addClass('fa fa-star-o');
+                       // $('#stars').append('<li><i class="fa fa-star-o"></i></li>');
                     }
 
                     function EnableClick() {
@@ -109,7 +125,7 @@ $(document).ready(function(){
                     }
 
                     function matchCards() {
-                        if (openedCards[0][0].firstChild.className == openedCards[1][0].firstChild.className) {
+                        if (($(this)) === openedCards[0]) {
                             console.log("matchCard");
                             openedCards[0].addClass("match").animateCss('pulse');
                             openedCards[1].addClass("match").animateCss('pulse');
@@ -140,16 +156,7 @@ $(document).ready(function(){
                         // timer.pause();
                     }
 
-                    //extend jquery to add function that does all animations
-                  
-                    initGame();
-});
-  $.fn.extend({
-                        animateCss: function(animationName) {
-                            var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
-                            this.addClass(animationName).one(animationEnd, function() {
-                                $(this).removeClass(animateName);
-                            });
-                            return this;
-                        }
-                    });
+                    
+initGame();
+					
+
