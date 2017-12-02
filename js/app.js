@@ -2,6 +2,9 @@
  * Create a list that holds all of your cards
  */
 /*jQuery.noConflict()(function ($) {*/
+//$(document).ready(function (){
+	
+
  var moves = 0;
   var openedCards = []
             var matched = 0;
@@ -32,8 +35,6 @@
                 matched = 0;
                 $('#deck').empty();
                 $('#stars').empty();
-                //$('#gameContainer')[0].style.display = "";
-                //$('#sucess-result')[0].style.display = "none";
                 startGame = false;
                 timer.stop();
                 $('#timer').html("00:00:00");
@@ -158,5 +159,5 @@
 
                     
 initGame();
-					
+	//});				
 
