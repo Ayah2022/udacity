@@ -2,7 +2,7 @@
  * Create a list that holds all of your cards
  */
 /*jQuery.noConflict()(function ($) {*/
-//$(document).ready(function (){
+$(document).ready(function (){
 	
 
  var moves = 0;
@@ -11,9 +11,9 @@
             var startGame = false;
             $('#reset-button').click(resetGame);
 			
-            var timer= new timer();
+        /*    var timer= new timer();
 	timer.addEventListener('timeupdated',function(event){
-		$('#timer').html(timer.getTime().toString());
+		$('#timer').html(timer.getTime().toString());*/
 	});
             cardsList = ["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb",
 			"fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb"];
@@ -36,8 +36,8 @@
                 $('#deck').empty();
                 $('#stars').empty();
                 startGame = false;
-                timer.stop();
-                $('#timer').html("00:00:00");
+               /* timer.stop();
+                $('#timer').html("00:00:00");*/
                 initGame();
             }
 
@@ -49,7 +49,7 @@
             }
 
             function addStars(num) {
-                for (car i = 0; i < num; i++) {
+                for (var i = 0; i < num; i++) {
                     $('#stars').append('<li><i class="fa fa-star"></i></li>');
                 }
             }
@@ -86,7 +86,7 @@
                         //start the timer
                         if (startGame == false) {
                             startGame = true;
-                            timer.start();
+//timer.start();
                         }
                         if (openedCards.length === 0) {
                             $(this).toggleClass("show open").animateCss('flipInY');
@@ -159,5 +159,5 @@
 
                     
 initGame();
-	//});				
+	});				
 
