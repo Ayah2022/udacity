@@ -15,8 +15,7 @@ $(document).ready(function (){
 	timer.addEventListener('timeupdated',function(event){
 		$('#timer').html(timer.getTime().toString());*/
 	});
-            cardsList = ["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb",
-			"fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb"];
+            cardsList = ["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb"];
                     //extend jquery to add function that does all animations
                     $.fn.extend({
                         animateCss: function(animationName) {
@@ -48,16 +47,17 @@ $(document).ready(function (){
                 addStars(3);
             }
 
-            function addStars(num) {
-                for (var i = 0; i < num; i++) {
+            function addStars() {
+                for (var i = 0; i < 3; i++) {
                     $('#stars').append('<li><i class="fa fa-star"></i></li>');
                 }
             }
 
             function createCards() {
-               
+               for( var i=; i<2; i++){
                         cardList = shuffle(cardList);
                         cardList.forEach(AddCard);
+			   }
 				 
                     
 			}
