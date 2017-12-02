@@ -10,10 +10,7 @@ $(document).ready(function (){
             var matched = 0;
             var startGame = false;
             $('#reset-button').click(resetGame);
-			
-        /*    var timer= new timer();
-	timer.addEventListener('timeupdated',function(event){
-		$('#timer').html(timer.getTime().toString());*/
+
 	});
             cardsList = ["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb"];
                     //extend jquery to add function that does all animations
@@ -35,8 +32,6 @@ $(document).ready(function (){
                 $('#deck').empty();
                 $('#stars').empty();
                 startGame = false;
-               /* timer.stop();
-                $('#timer').html("00:00:00");*/
                 initGame();
             }
 
@@ -83,10 +78,9 @@ $(document).ready(function (){
                    
 
                     function toggleCard() {
-                        //start the timer
+                        
                         if (startGame == false) {
                             startGame = true;
-//timer.start();
                         }
                         if (openedCards.length === 0) {
                             $(this).toggleClass("show open").animateCss('flipInY');
@@ -154,7 +148,7 @@ $(document).ready(function (){
                     }
 
                     function showWinBox() {
-                        // timer.pause();
+                     
                     }
 
                     
