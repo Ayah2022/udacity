@@ -11,7 +11,7 @@ $(document).ready(function (){
             var startGame = false;
             $('#reset-button').click(resetGame);
 
-	});
+
             cardsList = ["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb"];
                     //extend jquery to add function that does all animations
                     $.fn.extend({
@@ -35,7 +35,7 @@ $(document).ready(function (){
                 initGame();
             }
 
-            function initGame {
+            function initGame() {
                 createCards();
                 $('.card').click(toggleCard);
                 $('#moves').html("0 Moves");
@@ -49,9 +49,9 @@ $(document).ready(function (){
             }
 
             function createCards() {
-               for( var i=; i<2; i++){
-                        cardList = shuffle(cardList);
-                        cardList.forEach(AddCard);
+               for( var i=0; i<2; i++){
+                        cardsList = shuffle(cardsList);
+                        cardsList.forEach(AddCard);
 			   }
 				 
                     
@@ -90,7 +90,8 @@ $(document).ready(function (){
                             updateMoves();
                             $(this).toggleClass("show open").animateCss('flipInY');
                             openedCards.push($(this));
-                            setTimeout(matchCards, 1100);
+							matchCards();
+                           // setTimeout(matchCards, 1100);
                         }
                     }
 
@@ -105,14 +106,14 @@ $(document).ready(function (){
                         $('#moves').html(`${moves} Moves`);
                         if (moves == 16) {
                             rate();
-                        } else if (moves == 10) {
+                        } else if (moves == 8) {
                             rate();
                         }
                     }
 
                     function rate() {
-                        $('#stars').children()[0].removeClass('fa fa-star').addClass('fa fa-star-o');
-                       // $('#stars').append('<li><i class="fa fa-star-o"></i></li>');
+                       $('.fa fa-star').remove();
+                       $('#stars').append('<li><i class="fa fa-star-o"></i></li>');
                     }
 
                     function EnableClick() {
@@ -120,13 +121,14 @@ $(document).ready(function (){
                     }
 
                     function matchCards() {
-                        if (($(this)) === openedCards[0]) {
+                        if (openedCards[0] === openedCards[1]) {
                             console.log("matchCard");
                             openedCards[0].addClass("match").animateCss('pulse');
                             openedCards[1].addClass("match").animateCss('pulse');
                             disableCLick();
                             removeOpenCards();
-                            setTimeout(checkResult, 1000);
+							checkResult();
+                           // setTimeout(checkResult, 1000);
                         } else {
                             openedCards[0].toggleClass("show open").animateCss('flipInY');
                             openedCards[1].toggleClass("show open").animateCss('flipInY');
@@ -153,5 +155,5 @@ $(document).ready(function (){
 
                     
 initGame();
-	});				
+	});
 
