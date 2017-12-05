@@ -7,7 +7,7 @@ $(document).ready(function (){
 
  var moves = 0;
   var openedCards = [];
-
+var cardn="";
 
             var matched = 0;
             var startGame = false;
@@ -91,7 +91,8 @@ $(document).ready(function (){
                         } else if (openedCards.length === 1) {
                             updateMoves();
                             $(this).toggleClass("show open").animateCss('flipInY');
-                            openedCards.push($(this));
+                          //  openedCards.push($(this));
+						   cardn=$(this).context.innerHTML;
 							matchCards();
                            // setTimeout(matchCards, 1100);
                         }
@@ -99,6 +100,7 @@ $(document).ready(function (){
 
                     function disableClick() {
                         openedCards.forEach(function(card) {
+							$('#deck').find('.match').removeClass('open show animated');
                             card.off('click');
                         });
                     }
@@ -106,19 +108,18 @@ $(document).ready(function (){
                     function updateMoves() {
                         moves += 1;
                         $('#moves').html(`${moves} Moves`);
-                        if (moves == 16) {
-							
+                        if (moves == 24) {
                             rate();
-                        } else if (moves == 8) {
-						
+                        } else if (moves == 16) {
                             rate();
-                        }
+                        }else if(moves == 8){
+							rate();
+						}
 						
                     }
 
                     function rate() {
 						$('#stars li').first().remove();
-                    
                        $('#stars').append('<li><i class="fa fa-star-o"></i></li>');
                     }
 
@@ -127,17 +128,18 @@ $(document).ready(function (){
                     }
 
                     function matchCards() {
-                        if (openedCards[0] === openedCards[1]) {
+                        if (cardn === openedCards[0]) {
                             console.log("matchCard");
-                            openedCards[0].addClass("match").animateCss('pulse');
-                            openedCards[1].addClass("match").animateCss('pulse');
+                            cardn.addClass('match').animateCss('pulse');
+							
+                            openedCards[0].addClass('match').animateCss('pulse');
                             disableCLick();
                             removeOpenCards();
 							checkResult();
                            // setTimeout(checkResult, 1000);
                         } else {
+                            cardn.toggleClass("show open").animateCss('flipInY');
                             openedCards[0].toggleClass("show open").animateCss('flipInY');
-                            openedCards[1].toggleClass("show open").animateCss('flipInY');
                             EnableClick();
                             removeOpenCards();
                         }
