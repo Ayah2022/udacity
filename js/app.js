@@ -6,7 +6,9 @@ $(document).ready(function (){
 	
 
  var moves = 0;
-  var openedCards = []
+  var openedCards = [];
+
+
             var matched = 0;
             var startGame = false;
             $('#reset-button').click(resetGame);
@@ -105,14 +107,18 @@ $(document).ready(function (){
                         moves += 1;
                         $('#moves').html(`${moves} Moves`);
                         if (moves == 16) {
+							
                             rate();
                         } else if (moves == 8) {
+						
                             rate();
                         }
+						
                     }
 
                     function rate() {
-                       $('.fa fa-star').remove();
+						$('#stars li').first().remove();
+                    
                        $('#stars').append('<li><i class="fa fa-star-o"></i></li>');
                     }
 
