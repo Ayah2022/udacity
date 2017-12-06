@@ -7,7 +7,8 @@ $(document).ready(function() {
 
     var moves = 0;
     var openedCards = [];
-    //var cardn = "";
+    var firstCard = "";
+	var secondCard = "";
 
     var matched = 0;
     var startGame = false;
@@ -88,20 +89,20 @@ $(document).ready(function() {
         if (openedCards.length === 0) {
             $(this).toggleClass("show open").animateCss('flipInY');
             openedCards.push($(this));
+			//firstCard= $(this).firstChild.className;
             disableClick();
         } else if (openedCards.length === 1) {
             updateMoves();
             $(this).toggleClass("show open").animateCss('flipInY');
             openedCards.push($(this));
-            //cardn = $(this).context.innerHTML;
+           // secondCard = $(this).firstChild.className;
             matchCards();
-            // setTimeout(matchCards, 1100);
+           
         }
     }
 
     function disableClick() {
         openedCards.forEach(function(card) {
-           
             card.off('click');
         });
     }
@@ -125,11 +126,14 @@ $(document).ready(function() {
     }
 
     function EnableClick() {
+		   /*    openedCards.forEach(function(card) {
+            card.on('click');
+        });*/
         openedCards[0].click(toggleCard);
     }
 
     function matchCards() {
-        if (openedCards[0][1].firstChild.className == openedCards[1][0].firstChild.className) {
+        if (openedCards[0][0].firstChild.className == openedCards[1][0].firstChild.className) {
             console.log("matchCard");
             openedCards[0].addClass('match').animateCss('pulse');
             openedCards[1].addClass('match').animateCss('pulse');
