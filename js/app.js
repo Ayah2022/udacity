@@ -86,16 +86,18 @@ $(document).ready(function() {
         if (startGame == false) {
             startGame = true;
         }
-        if (openedCards.length === 0) {
+        if (openedCards.length === 0 ) {
             $(this).toggleClass("show open").animateCss('flipInY');
-            openedCards.push($(this));
-			//firstCard= $(this).firstChild.className;
+            console.log("array size before"+openedCards.length);
+		openedCards.push($(this));
+			firstCard=this.firstChild.className;
             disableClick();
         } else if (openedCards.length === 1) {
             updateMoves();
             $(this).toggleClass("show open").animateCss('flipInY');
             openedCards.push($(this));
-           // secondCard = $(this).firstChild.className;
+			secondCard=this.firstChild.className;
+			
             matchCards();
            
         }
@@ -133,17 +135,24 @@ $(document).ready(function() {
     }
 
     function matchCards() {
-        if (openedCards[0][0].firstChild.className == openedCards[1][0].firstChild.className) {
+		
+        if (firstCard === secondCard) {
             console.log("matchCard");
-            openedCards[0].addClass('match').animateCss('pulse');
-            openedCards[1].addClass('match').animateCss('pulse');
-            disableCLick();
+            openedCards[0].addClass('match');
+			openedCards[0].animateCss('pulse');
+            openedCards[1].addClass('match');
+			openedCards[1].animateCss('pulse');
+           // disableCLick();
+  
             removeOpenCards();
             checkResult();
             // setTimeout(checkResult, 1000);
         } else {
-            openedCards[0].toggleClass("show open").animateCss('flipInY');
+			
+				openedCards[0].toggleClass("show open").animateCss('flipInY');
             openedCards[1].toggleClass("show open").animateCss('flipInY');
+			
+            
             EnableClick();
             removeOpenCards();
         }
@@ -159,9 +168,11 @@ $(document).ready(function() {
         if (matched == 8) {
             showWinBox();
         }
+		
     }
 
     function showWinBox() {
+		
 
     }
 
