@@ -110,6 +110,13 @@ h1 {
 }
 .text-right{
 	float: right;
+	position: relative;
+}
+.timer{
+	position: absolute;
+	right: 25px;
+	
+	
 }
 .star{
 	float: inline;

@@ -9,7 +9,9 @@ $(document).ready(function() {
     var openedCards = [];
     var firstCard = "";
 	var secondCard = "";
-
+	var timer;
+	var stars=3;
+    var timerValue;
     var matched = 0;
     var startGame = false;
     $('#reset-button').click(resetGame);
@@ -35,10 +37,19 @@ $(document).ready(function() {
         $('#deck').empty();
         $('#stars').empty();
         startGame = false;
+		clearInterval(timer);
+		$(".timer").text("00:00");
         initGame();
     }
 
     function initGame() {
+	    moves = 0;
+        matched = 0;
+        $('#deck').empty();
+        $('#stars').empty();
+        startGame = false;
+		clearInterval(timer);
+		$(".timer").text("00:00");
         createCards();
         $('.card').click(toggleCard);
         $('#moves').html("0 Moves");
@@ -85,11 +96,11 @@ $(document).ready(function() {
 
         if (startGame == false) {
             startGame = true;
+			Timer();
         }
         if (openedCards.length === 0 ) {
             $(this).toggleClass("show open").animateCss('flipInY');
-            console.log("array size before"+openedCards.length);
-		openedCards.push($(this));
+		    openedCards.push($(this));
 			firstCard=this.firstChild.className;
             disableClick();
         } else if (openedCards.length === 1) {
@@ -97,8 +108,7 @@ $(document).ready(function() {
             $(this).toggleClass("show open").animateCss('flipInY');
             openedCards.push($(this));
 			secondCard=this.firstChild.className;
-			
-            matchCards();
+            setTimeout(matchCards,1000);
            
         }
     }
@@ -112,11 +122,11 @@ $(document).ready(function() {
     function updateMoves() {
         moves += 1;
         $('#moves').html(`${moves} Moves`);
-        if (moves == 24) {
+        if (moves == 32) {
             rate();
-        } else if (moves == 16) {
+        } else if (moves == 24) {
             rate();
-        } else if (moves == 8) {
+        } else if (moves == 17) {
             rate();
         }
 
@@ -124,13 +134,11 @@ $(document).ready(function() {
 
     function rate() {
         $('#stars li').first().remove();
+		stars-= 1;
         $('#stars').append('<li><i class="fa fa-star-o"></i></li>');
     }
 
     function EnableClick() {
-		   /*    openedCards.forEach(function(card) {
-            card.on('click');
-        });*/
         openedCards[0].click(toggleCard);
     }
 
@@ -142,17 +150,12 @@ $(document).ready(function() {
 			openedCards[0].animateCss('pulse');
             openedCards[1].addClass('match');
 			openedCards[1].animateCss('pulse');
-           // disableCLick();
-  
             removeOpenCards();
-            checkResult();
-            // setTimeout(checkResult, 1000);
+            setTimeout(checkResult, 1000);
         } else {
 			
-				openedCards[0].toggleClass("show open").animateCss('flipInY');
+			openedCards[0].toggleClass("show open").animateCss('flipInY');
             openedCards[1].toggleClass("show open").animateCss('flipInY');
-			
-            
             EnableClick();
             removeOpenCards();
         }
@@ -166,14 +169,61 @@ $(document).ready(function() {
     function checkResult() {
         matched += 1;
         if (matched == 8) {
-            showWinBox();
+			timerValue= document.getElementsByClassName("timer").innerHTML;
+            setTimeout(showWinBox,1000);
         }
 		
     }
+	
+	function Timer() {
+	let startTime = new Date().getTime();
+
+	// Update the timer every second
+	timer = setInterval(function() {
+
+		let currentTime= new Date().getTime();
+
+		// calculate time elapsed 
+		let timePlayed = currentTime- startTime;
+
+		// Calculate minutes and seconds
+		let mins = Math.floor((timePlayed% (1000 * 60 * 60)) / (1000 * 60));
+		let secs = Math.floor((timePlayed % (1000 * 60)) / 1000);
+        timerValue= mins +" minutes " + secs +" seconds ";
+		// Add starting 0 if seconds < 10
+		if (secs < 10) {
+			secs = "0" + secs;
+		}
+		if (mins < 10){
+			mins = "0" +mins;
+		}
+
+		let lastCurrentTime = mins + ':' + secs;
+
+		// Update timer on game screen and modal
+		$(".timer").text(lastCurrentTime);
+	}, 500);
+}
 
     function showWinBox() {
-		
-
+		swal({
+	    width: 600,
+        padding: 100,
+		allowEscapeKey: false,
+		allowOutsideClick: false,
+		animation: true,
+        customClass: 'animated tade',
+		title: 'Congratulations! You Won!',
+		text: 'With ' + moves + ' Moves and ' + stars + ' Stars.\n wooo! ' +' Ellapsed Time'+ timerValue,
+		type: 'success',
+		confirmButtonColor: '#d33',
+		confirmButtonText: 'Play again!'
+	}).then(function(isConfirm) {
+		if (isConfirm) {
+			clearInterval(timer);
+			initGame();
+		}
+	})
     }
 
 
