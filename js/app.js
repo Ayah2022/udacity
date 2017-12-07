@@ -4,19 +4,25 @@
 /*jQuery.noConflict()(function ($) {*/
 $(document).ready(function() {
 
-
+    //to store number of moves found 
     var moves = 0;
+	// Array to keep track of open cards
     var openedCards = [];
+	//variables to store class names of first and second cards
     var firstCard = "";
     var secondCard = "";
+	// variable to update the timer every second
     var timer;
     var stars = 3;
+	//variable to get the ellapsed time
     var timerValue;
+	// to store number of matches found
     var matched = 0;
+	// check when first card is opened
     var startGame = false;
     $('#reset-button').click(resetGame);
 
-
+    //list that holds all cards
     cardsList = ["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb"];
     //extend jquery to add function that does all animations
     $.fn.extend({
@@ -30,7 +36,7 @@ $(document).ready(function() {
     });
 
 
-
+    // Restart memory Game
     function resetGame() {
         moves = 0;
         matched = 0;
@@ -41,7 +47,7 @@ $(document).ready(function() {
         $(".timer").text("00:00");
         initGame();
     }
-
+    // Initial Game and Display the cards on the page
     function initGame() {
         moves = 0;
         matched = 0;
@@ -55,22 +61,23 @@ $(document).ready(function() {
         $('#moves').html("0 Moves");
         addStars(3);
     }
-
+    // create and append star html
     function addStars() {
         for (var i = 0; i < 3; i++) {
             $('#stars').append('<li><i class="fa fa-star"></i></li>');
         }
     }
-
+    // create random cards on the deck
     function createCards() {
         for (var i = 0; i < 2; i++) {
             cardsList = shuffle(cardsList);
+			//loop through each card and create its HTML
             cardsList.forEach(AddCard);
         }
 
 
     }
-
+    // shuffle the list of cards using the shuffle() method
     function shuffle(array) {
         var currentIndex = array.length,
             temporaryValue, randomIndex;
@@ -84,7 +91,7 @@ $(document).ready(function() {
         }
         return array;
     }
-
+    // create and append card html
     function AddCard(card) {
         $('#deck').append(`<li class="card animated"><i class="fa ${card}"></i></li>`);
     }
@@ -93,9 +100,10 @@ $(document).ready(function() {
 
 
     function toggleCard() {
-
+		
         if (startGame == false) {
             startGame = true;
+			// start the timer when first card is opened
             Timer();
         }
         if (openedCards.length === 0) {
@@ -112,13 +120,13 @@ $(document).ready(function() {
 
         }
     }
-
+    // Disable click of the open Cards
     function disableClick() {
         openedCards.forEach(function(card) {
             card.off('click');
         });
     }
-
+    // increment moves
     function updateMoves() {
         moves += 1;
         $('#moves').html(`${moves} Moves`);
@@ -137,13 +145,13 @@ $(document).ready(function() {
         stars -= 1;
         $('#stars').append('<li><i class="fa fa-star-o"></i></li>');
     }
-
+    // enable click on the open card
     function EnableClick() {
         openedCards[0].click(toggleCard);
     }
-
+    // check openCards if they match or not
     function matchCards() {
-
+        // Compare opened cards
         if (firstCard === secondCard) {
             console.log("matchCard");
             openedCards[0].addClass('match');
@@ -153,7 +161,7 @@ $(document).ready(function() {
             removeOpenCards();
             setTimeout(checkResult, 1000);
         } else {
-
+            // Cards flip
             openedCards[0].toggleClass("show open").animateCss('flipInY');
             openedCards[1].toggleClass("show open").animateCss('flipInY');
             EnableClick();
@@ -165,7 +173,7 @@ $(document).ready(function() {
     function removeOpenCards() {
         openedCards = [];
     }
-
+    // calculate time ellapsed if match all cards
     function checkResult() {
         matched += 1;
         if (matched == 8) {
@@ -204,11 +212,10 @@ $(document).ready(function() {
             $(".timer").text(lastCurrentTime);
         }, 500);
     }
-
+    // Show Results and end game or play again
     function showWinBox() {
+		clearInterval(timer);
         swal({
-            width: 600,
-            padding: 100,
             allowEscapeKey: false,
             allowOutsideClick: false,
             animation: true,
@@ -226,6 +233,6 @@ $(document).ready(function() {
         })
     }
 
-
+    // function call that start game
     initGame();
 });
