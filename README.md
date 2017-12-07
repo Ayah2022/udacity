@@ -35,4 +35,4 @@ This project is done as part of the Front-End Web Developer Nanodegree program b
 
 ## If you want to play  
 
-**Click**[this link](https://ayah2022.github.io/udacity/)
+**Click** [this link](https://ayah2022.github.io/udacity/)
