@@ -7,6 +7,6 @@ The game ends when all pairs are matched.
 
 Scoring
 
-3 stars = 16 moves or less
-2 stars = 24 moves or more till 31 moves
-1 star = 32 moves or more
+3 stars = 16 moves or less.
+2 stars = 24 moves or more till 31 moves.
+1 star = 32 moves or more.
