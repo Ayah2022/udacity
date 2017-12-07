@@ -1,7 +1,7 @@
 ﻿## Welcome to memory game project
 
 ## What Will I Build?
-The Memory Game Project is all about demonstrating your mastery of HTML, CSS, and JavaScript. You’ll build a complete browser-based card matching game (also known as Concentration). But this isn’t just any memory game! It’s a snazzy, well-designed, and feature-packed memory game!
+The Memory Game Project is all about demonstrating your mastery of HTML, CSS, and JavaScript. 
 
 ![alt text](img/Screenshot%20(137).png)  
 
